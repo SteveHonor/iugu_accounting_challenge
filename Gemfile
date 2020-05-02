@@ -16,6 +16,7 @@ gem 'rack-cors'
 group :development, :test do
   gem 'pry', '~> 0.12.2'
   gem 'rspec-rails', '~> 4.0.0'
+  gem 'database_cleaner-active_record'
   gem 'factory_bot_rails'
   gem 'faker'
 end
