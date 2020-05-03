@@ -13,7 +13,10 @@ gem 'bootsnap', '>= 1.4.2', require: false
 
 gem 'rack-cors'
 
+gem 'jwt'
+
 gem 'bcrypt', '~> 3.1.7'
+
 group :development, :test do
   gem 'pry', '~> 0.12.2'
   gem 'rspec-rails', '~> 4.0.0'
