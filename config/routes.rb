@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
-  resources :customers
+  # Customers
+  post 'customers', controller: :customers,      action: :create, as: :customer
+
+  # Authentication
   post 'auth',      controller: :authentication, action: :auth
+
+  # Account
+  post 'accounts',  controller: :accounts,       action: :create, as: :account
 end
