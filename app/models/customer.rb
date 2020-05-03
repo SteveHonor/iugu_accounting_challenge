@@ -1,5 +1,6 @@
 class Customer < ApplicationRecord
   has_secure_password
+  has_one :account
 
   validates_uniqueness_of :email, case_sensitive: true
 
