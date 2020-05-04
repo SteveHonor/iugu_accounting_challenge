@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::API
+  before_action :validation_token, only: :authorize!
+
   def authorize!
     begin
       @decoded = decode(token)
@@ -8,13 +10,13 @@ class ApplicationController < ActionController::API
       }, status: :unauthorized
     rescue JWT::DecodeError => e
       render json: {
-        errors: e.message
+        errors: 'forgot token'
       }, status: :unauthorized
     end
   end
 
   def current_customer
-    @current_client = Customer.find(@decoded[:customer_id])
+    @current_client = Customer.find(@decoded[:customer_id]) if @decoded
   end
 
   protected
@@ -35,5 +37,11 @@ class ApplicationController < ActionController::API
 
   def token
     request.headers['Authorization']&.split(' ')&.last || ''
+  end
+
+  def validation_token
+    render json: {
+      errors: 'invalid token'
+    }, status: :unauthorized unless token.present?
   end
 end
