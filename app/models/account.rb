@@ -8,8 +8,8 @@ class Account < ApplicationRecord
   validates :id, presence: true
   validates :name, presence: true
 
-  def check_not_limit amount
-    return true if (self.balance.to_number + amount.to_f) < 0
+  def has_limit? amount
+    return self[:balance] >= amount
   end
 
   def balance

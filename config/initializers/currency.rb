@@ -1,11 +1,11 @@
 module Currency
   module String
     def to_number
-      return self.gsub(/^R\$/, '').gsub('.', '').gsub(',', '.').to_f if self.is_real?
+      return self.is_real? ? self.gsub(/^R\$/, '').gsub('.', '').gsub(',', '.').to_f : self.to_f
     end
 
     def is_real?
-      self =~ /^(R\$)?(|-)?[0-9]+((\.|,)[0-9]+)/ ? true : false
+      self =~ /^(R\$)?((\d+)|(\d{1,3})(\.\d{3}|)*)(\,\d{2}|)$/ ? true : false
     end
   end
 

@@ -5,14 +5,14 @@ class AccountsController < ApplicationController
     @account = Account.new(
       id: account_params[:id],
       name: account_params[:name],
-      balance: account_params[:balance],
+      balance: account_params[:balance].to_number || account_params[:balance].to_f,
       customer: current_customer
     )
 
     if @account.save
       @account.movements.create!(
         kind: :credit,
-        amount: account_params[:balance]
+        amount: account_params[:balance].to_number || account_params[:balance].to_f
       )
 
       render json: {

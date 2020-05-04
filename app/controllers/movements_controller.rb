@@ -55,17 +55,20 @@ class MovementsController < ApplicationController
   end
 
   def amount_is_greater_than_zero?
+    amount = account_params[:amount].to_number || account_params[:amount].to_f
+
     render json: {
       error: 'amount must be greater than 0'
-    }, status: :unprocessable_entity and return if account_params[:amount].nil? || account_params[:amount].to_f <= 0
+    }, status: :unprocessable_entity and return if amount <= 0
   end
 
   def origin_has_limit?
-    amount = account_params[:amount].to_f * -1
+    amount = account_params[:amount].to_number || account_params[:amount].to_f
+
     if origin_account
       render json: {
         error: "source account has no available limit"
-      }, status: :not_acceptable and return if origin_account.check_not_limit(amount)
+      }, status: :not_acceptable and return unless origin_account.has_limit?(amount)
     end
   end
 end
