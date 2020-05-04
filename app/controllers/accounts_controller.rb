@@ -10,6 +10,11 @@ class AccountsController < ApplicationController
     )
 
     if @account.save
+      @account.movements.create!(
+        kind: :credit,
+        amount: account_params[:balance]
+      )
+
       render json: {
         id: @account.id,
         token: token
@@ -17,6 +22,16 @@ class AccountsController < ApplicationController
     else
       render json: @account.errors, status: :unprocessable_entity
     end
+  end
+
+  def balance
+    render json: {
+      balance: Account.find(params[:account_id]).balance
+    }, status: :ok
+  rescue
+    render json: {
+      error: 'account not exist'
+    }, status: :unprocessable_entity and return
   end
 
   private
