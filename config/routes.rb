@@ -7,4 +7,6 @@ Rails.application.routes.draw do
 
   # Account
   post 'accounts',  controller: :accounts,       action: :create, as: :account
+  # Movement
+  post 'transfer',  controller: :movements, action: :transfer, as: :movement
 end
