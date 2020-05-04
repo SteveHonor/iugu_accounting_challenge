@@ -17,6 +17,15 @@ class Movement < ApplicationRecord
       set_balance(account_id)
     end
 
+    def create_credit account_id: nil, amount: 0
+      self.create!(
+        kind: :credit,
+        account_id: account_id,
+        amount: amount
+      )
+
+      set_balance(account_id)
+    end
 
     private
 
