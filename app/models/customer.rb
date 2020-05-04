@@ -16,5 +16,5 @@ class Customer < ApplicationRecord
       new_record? || !password.nil?
   }
 
-  validates_presence_of :name, :email, :document, :password_digest
+  validates_presence_of :name, :document, :password_digest
 end
