@@ -14,6 +14,16 @@
 - factory_bot_rails - suporte para instancias de classes durante o teste
 - faker - gerar dados aleatórios
 
+## Git
+
+padrão de mensagens: <http://karma-runner.github.io/4.0/dev/git-commit-msg.html>
+
+exemplo:
+
+```bash
+<type>(<scope>): <subject>
+```
+
 ## Requisitos Opcionais
 
 - Docker (recomendado: version 19.03.8)
@@ -22,8 +32,9 @@
 ## Setup
 
 1. `docker-compose build`
-2. `docker-compose run web bundle exec rake db:drop db:create db:migrate`
-3. `docker-compose up`
+2. `docker-compose up -d`
+3. `docker-compose start db`
+4. `docker-compose exec web bundle exec rake db:create db:migrate`
 
 ## Test
 
