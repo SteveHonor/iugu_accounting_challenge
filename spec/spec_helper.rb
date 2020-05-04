@@ -13,7 +13,5 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 
-  config.use_transactional_fixtures = false
-
   config.shared_context_metadata_behavior = :apply_to_host_groups
 end
