@@ -152,4 +152,30 @@ RSpec.describe AccountsController, type: :controller do
       end
     end
   end
+
+  describe 'GET #balance' do
+    context 'when return balance' do
+      let(:account) {
+        FactoryBot.create(:account, id: '123456', balance: '1.200,00'.to_number)
+      }
+
+      before(:each) do
+        customer
+
+        request.headers.merge!({
+          "Authorization": token
+        })
+
+        account
+      end
+
+      it 'return account balance' do
+        get :balance, params: {
+          account_id: '123456'
+        }
+
+        expect(JSON.parse(response.body)['balance']).to eq('R$1.200,00')
+      end
+    end
+  end
 end
