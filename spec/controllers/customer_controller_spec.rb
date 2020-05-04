@@ -23,7 +23,7 @@ RSpec.describe CustomersController, type: :controller do
         expect(response).to have_http_status(:success)
       end
 
-      it 'returns a object of customers' do
+      it 'returns one customers' do
         create_customer
         all_customers
         expect(all_customers.size).to eq(1)

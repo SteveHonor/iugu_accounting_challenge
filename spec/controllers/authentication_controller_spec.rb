@@ -28,7 +28,7 @@ RSpec.describe AuthenticationController do
     describe 'with incorrect credentials' do
       let!(:auth) {
         post :auth, params: {
-          authentication: {  
+          authentication: {
             email: customer.email,
             password: '12345'}
           }
