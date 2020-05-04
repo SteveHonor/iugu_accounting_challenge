@@ -10,10 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_03_035649) do
+ActiveRecord::Schema.define(version: 2020_05_03_083004) do
 
-  create_table "accounts", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "id"
+  create_table "accounts", id: :string, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.decimal "balance", precision: 14, scale: 2
     t.bigint "customer_id"
@@ -29,6 +28,15 @@ ActiveRecord::Schema.define(version: 2020_05_03_035649) do
     t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "movements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "kind", default: 0
+    t.bigint "account_id"
+    t.decimal "amount", precision: 14, scale: 2
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id"], name: "index_movements_on_account_id"
   end
 
   add_foreign_key "accounts", "customers"
